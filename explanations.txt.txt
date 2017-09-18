@@ -1,0 +1,23 @@
+Q1. We iteratively check through the loop to see if any sorted substrings of 's' are anagrams with sorted 't'. 
+Since the complete string s needs to be iterated the time complexity would be O(len(s)) and space complexity would be O(1). 
+
+Q2. We loop through the elements of stirngs to check if they are palindromes and collect the maximum length palindrome.
+Since we use loop within loop the time complexity is O(n^2) and space complexity O(1).
+
+Q3. I have used Kruskal's algorithm for this problem.We basically iterate through the sorted egdes and apply find-union algorithm using 
+union by rank and path compression.The principle here is to always attach smaller depth trees under root of the deeper tree.
+Path comression helps in making the found root parent of node so that we dont have to traverse through all the 
+internediate nodes again.Path from all nodes under root of subtree are compressed. The algorithm is called greedy 
+algorithm as it picks greedily the smallest weight edge  that does not form a cycle. If 'E' is the number of edges,
+sorting would take O(ElogE) time. Henc the time complexity would be O(ElogE).
+
+Q4. We will traverse through the tree from top-down and with the BST properties, the least common ancestor between 
+two nodes being the first node we meet with the value between n1 and n2. We will go left if 
+the current node is greater than both n1 and n2, right if the current node is less than both n1 and n2,
+else the node is the least common ancestor. Since the worst case we will traverse is the depth of a binary tree, 
+the time complexity will be O(log(n)) (if balanced, else it will be O(n)) where n is the number of elements in the tree.
+The space complexity is O(1) because we only keep track of the current node at the traversal stage.
+
+Q5. We first traverse the linked list to get its length and determine the number of elements to traverse on the second pass to get
+the elememt at mth position form back. Space complexity will be O(1) since we only store the length.The time to traverse through 
+the linked list twice would be O(n).
