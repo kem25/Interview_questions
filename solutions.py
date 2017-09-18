@@ -253,7 +253,97 @@ question4([[0, 1, 0, 0, 0],
           1,
           4)
 """
+def question4(T, r, n1, n2):    
+    numrows = len(T)
 
+    # to check if inputs are within bound
+    if(n1>numrows):
+        print("Invalid input. Make sure inputs are within bound")
+    else:    
+       # print(T[20][8])
+        # To check if nodes belong to tree
+        check = 0
+        S=[n1,n2]
+        s1=len(S)
+        for p in range(s1) :
+            for i in range(numrows):
+                 if(T[S[p]][i]==1):
+                    check +=1
+                 if(T[i][S[p]]==1):
+                     check +=1
+            if(check==0):
+                print(str(S[p])+' is not in tree')
+                break
+            else:
+               # if root is greater than nodes then traverse to left(find smallest child)
+                if(r>max(n1,n2)):
+                    temp = 0
+                    # traverse through row to find first child
+                    while(temp<numrows):
+                        if(T[r][temp]==1):
+                            r=temp
+                            # recursive call with new child as root
+                            return question4(T,r,n1,n2)
+                        else:
+                            temp=temp+1
+
+                # if root less than nodes then traverse right(find greatest child)           
+                elif(r<min(n1,n2)):
+                    #print(r)
+                    temp = numrows-1
+                    # iterate from reverse of row to find first  
+                    while(temp>=0):
+                        if(T[r][temp]==1):
+                            r=temp
+                            # recursive call with new child as root
+                            return question4(T,r,n1,n2)
+                        else:
+                            temp=temp-1
+
+                # if root lies between the two nodes then that is the LCA
+                else:
+                    return r
+
+def main():
+    print(question4([[0, 1, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[1, 0, 0, 0, 1],[0, 0, 0, 0, 0]],3,1,4))
+    # 3
+
+    print(question4([[0,0,0,0,0,0],[1,0,1,0,0,0],[0,0,0,0,0,0],[0,1,0,0,0,1],[0,0,0,0,0,0]],3,0,2))
+    # 1
+
+    print(question4([[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1], 
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],20,12,14))
+    # 12
+
+    print(question4([[0, 1, 0, 0, 0],[0, 0, 0, 0, 0],[0, 0, 0, 0, 0],[1, 0, 0, 0, 1],[0, 0, 0, 0, 0]],3,2,4))
+    # 2 is not in Tree
+ 
+    print(question4([[0,0,0,0,0,0],[1,0,1,0,0,0],[0,0,0,0,0,0],[0,1,0,0,0,1],[0,0,0,0,0,0]],3,8,2))
+    # Invalid input.Make sure inputs are within bound
+
+if __name__ == '__main__':
+    main()
 
 
 """

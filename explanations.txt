@@ -11,11 +11,12 @@ internediate nodes again.Path from all nodes under root of subtree are compresse
 algorithm as it picks greedily the smallest weight edge  that does not form a cycle. If 'E' is the number of edges,
 sorting would take O(ElogE) time. Henc the time complexity would be O(ElogE).
 
-Q4. We define a function which returns the parent(if exists) of any node given the tree and the node as an input. We then recursively collect the
-parent for each node starting from n1 (then make the new parent as root) until n1 is not the root. Similarly, we recursively find the parent 
-starting from node n2 and at the same time check if the parent exits in the collection of parents of node n1. The first occurence of the parent of n2 
-in the collection of parents of n1 is the least common ancestor that is farthest from the root.The time complexity of traversing the matrix would be 
-O(n) and space complexity O(1).
+Q4. We recursively traverse through the matrix based on the relative position of the root with the nodes until the root lies between 
+the two nodes. So, we start with the root and see if both nodes are smaller or greater than the root. If both nodes are smaller than 
+the root, it means that the nodes lie in the left sub-tree and we need to traverse left. So we find the left child(smallest child) of the root
+and traverse making the child the root. Similarly, if the root is less than the two nodes then we need to traverse right(Meaning we need
+to fing the lagrger child of the root and make it the root). So when we reach the root which lies between the values of nodes then it is
+the LCA of the nodes.The time complexity of traversing through the matix is O(n) and space complexity O(1).
 
 Q5. We first traverse the linked list to get its length and determine the number of elements to traverse on the second pass to get
 the elememt at mth position form back. Space complexity will be O(1) since we only store the length.The time to traverse through 
