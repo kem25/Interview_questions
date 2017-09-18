@@ -6,53 +6,54 @@ True. Your function definition should look like: question1(s, t) and return a
 boolean True or False.
 """
 
-# definition that checks anagrams
-def is_anagram(s1, s2):
-    s1 = list(s1)
-    s1.sort()
-    return s1 == s2
-
-# Checks if any substrings of string s
-# upto certain length are anagrams with t
 def question1(s, t):
-    
-    # check if s is string
-    if type(s) != str:
-        return "s is not a string"
-    
-    # check if t is string
-    if type(t) != str:
-        return "r is not a string"
-
-    # if t is empty, always return true
-    if len(t) == 0:
-        return True
-    # s should conatin alteast as many characters as t
-    if len(s) == 0 or len(s) < len(t):
-        return False
-    
-    # check if substrings anagram with t
-    t=list(t)
-    t.sort()
-    for i in range(len(s)-len(t)+1):
-        if is_anagram(s[i:i+len(t)],t):
-            return True
+        
+  #create dict for all characters in a given string
+  def create_dict(string):
+    string_dict = {}
+    for character in string:
+      if character in string_dict:
+        string_dict[character] += 1
+      else:
+        string_dict[character] = 1
+    return string_dict
+  #check if inputs exist
+  if s == None or t == None:
     return False
-
+  if type(t) != str:
+    return "t is needs to be a string"
+  #check if inputs are same
+  if s == t:
+    return True
+  #check if s is longer than t
+  if len(s) < len(t): 
+    return False
+  
+  #create dicionary from the strings
+  t_dict = create_dict(t)
+  s_dict = create_dict(s)
+  #s should have all characters in t with occurences equal to or greater than occurence in t
+  for character in t_dict: 
+    if character not in s_dict:
+      return False
+    if s_dict[character] < t_dict[character]:
+      return False 
+  return True
 def main():
-    print(question1("Udacity","city"))
-    # True
-    print(question1("Udacity","au"))
-    # False
-    print(question1("Udacity",""))
-    # True
-    print(question1("Udacity",2))
-    # r is not a string
-    print(question1("Udacity","UdacityPro"))
-    # False
+  print(question1("Udacity","ad"))
+  # True
+  print(question1("Udacity",2))
+  # t needs to be a string
+  print(question1("Udacity","au"))
+  # False
+  print(question1("Udacity",""))
+  # True
+  print(question1("Udacity","UdacityPro"))
+  # False
 
-if __name__=='__main__':
-    main()
+if __name__ == '__main__':
+  main()
+
 
 """
 Question 2

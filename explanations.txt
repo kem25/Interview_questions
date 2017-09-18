@@ -1,5 +1,7 @@
-Q1. We iteratively check through the loop to see if any sorted substrings of 's' are anagrams with sorted 't'. 
-Since the complete string s needs to be iterated the time complexity would be O(len(s)) and space complexity would be O(1). 
+Q1. We first define a function that creates dictinaries for the given strings.(i.e, it stores the occurences of the characters in the strings).
+For anagram of t to be a substring of s, s needs to have all the characters in t and with occurences greater than or equal to the 
+occurences in t. Hence we check if the dictinaries of t and s satisfy this condition to obtain the result. Since we only have to loop through
+limited characters, the time comlexity is O(len(s)) and space complexity O(1).
 
 Q2. We loop through the elements of stirngs to check if they are palindromes and collect the maximum length palindrome.
 Since we use loop within loop the time complexity is O(n^2) and space complexity O(1).
