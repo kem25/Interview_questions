@@ -432,4 +432,34 @@ print(question5(A,8))
 # m cannot be 
 
 
+""" Write a code and include a route that
+simulates rolling two dice and returns
+the result in JSON."""
+from flask import Flask 
+app = Flask(__name__) 
+ 
+import json 
+import random 
+ 
+ 
+@app.route('/') 
+def hello_world(): 
+  return 'Hello World!' 
+ 
+# Route for diceroll 
+@app.route('/diceroll/JSON') 
+def diceRollJSON(): 
+    # random no. within limits 
+    dice1 = random.randint(1, 6) 
+    dice2 = random.randint(1, 6) 
+    dice_total = dice1 + dice2 
+    return jsonify( 
+        dice1=dice1, 
+        dice2=dice2, 
+        diceroll=dice_total 
+    ) 
+ 
+if __name__ == '__main__': 
+  app.debug = True 
+  app.run()
     
